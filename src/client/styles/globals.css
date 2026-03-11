@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a15;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a3a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a4a;
+}
+
+/* Puzzle interaction cursors */
+.cursor-inspect {
+  cursor: zoom-in;
+}
+.cursor-grab-item {
+  cursor: grab;
+}
+.cursor-grab-item:active {
+  cursor: grabbing;
+}
+
+/* Zone highlight on hover */
+.zone-interactable {
+  transition: all 0.2s ease;
+}
+.zone-interactable:hover {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Narrative text reveal */
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.narrative-reveal {
+  animation: textReveal 0.6s ease forwards;
+}
+
+/* Puzzle solve flash */
+@keyframes solveFlash {
+  0% { background-color: rgba(16, 185, 129, 0); }
+  50% { background-color: rgba(16, 185, 129, 0.15); }
+  100% { background-color: rgba(16, 185, 129, 0); }
+}
+.solve-flash {
+  animation: solveFlash 1s ease;
+}
+
+/* Shake animation for wrong answers */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Asset loading fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Zoom view depth-of-field blur on background */
+.zoom-bg-blur {
+  filter: brightness(0.6) blur(2px);
+}
+
+/* Sprite hover glow */
+.sprite-glow:hover {
+  filter: brightness(1.2) drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+}
+
+/* ===== Puzzle Feedback ===== */
+
+/* Green flash border on correct answer */
+@keyframes correctFlash {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); border-color: rgba(16, 185, 129, 0.8); }
+  50% { box-shadow: 0 0 30px 5px rgba(16, 185, 129, 0.3); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); border-color: transparent; }
+}
+.puzzle-correct {
+  animation: correctFlash 1s ease forwards;
+}
+
+/* Red flash border on wrong answer */
+@keyframes wrongFlash {
+  0% { border-color: rgba(239, 68, 68, 0.8); }
+  50% { box-shadow: 0 0 20px 3px rgba(239, 68, 68, 0.2); }
+  100% { border-color: transparent; box-shadow: none; }
+}
+.puzzle-wrong {
+  animation: shake 0.3s ease-in-out, wrongFlash 0.8s ease forwards;
+}
+
+/* Loading spinner */
+@keyframes spin360 {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  border-top-color: rgba(139, 92, 246, 0.8);
+  border-radius: 50%;
+  animation: spin360 0.6s linear infinite;
+}
+
+/* ===== Typewriter Effect ===== */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typewriter-cursor::after {
+  content: "▍";
+  animation: blink 0.8s step-end infinite;
+  color: rgba(16, 185, 129, 0.7);
+}
+
+/* ===== Victory/Failure Screens ===== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+.fade-in-up-delay-1 { animation: fadeInUp 0.8s ease 0.3s forwards; opacity: 0; }
+.fade-in-up-delay-2 { animation: fadeInUp 0.8s ease 0.6s forwards; opacity: 0; }
+.fade-in-up-delay-3 { animation: fadeInUp 0.8s ease 0.9s forwards; opacity: 0; }
+
+@keyframes victoryGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+  50% { text-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 0 0 80px rgba(16, 185, 129, 0.2); }
+}
+.victory-glow {
+  animation: victoryGlow 2s ease-in-out infinite;
+}
+
+/* Confetti particle */
+@keyframes confettiFall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.confetti-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+}
+
+/* Fade to black overlay */
+@keyframes fadeToBlack {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-to-black {
+  animation: fadeToBlack 1s ease forwards;
+}
+
+/* ===== Partner Presence ===== */
+@keyframes partnerPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+}
+.partner-pulse {
+  animation: partnerPulse 1s ease 3;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 640px) {
+  .zone-interactable {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Stack HUD items more compactly on mobile */
+  .hud-timer {
+    font-size: 1.25rem;
+  }
+
+  /* Full-width puzzle modals on mobile */
+  .puzzle-modal-mobile {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+}
+
+/* ===== Focus styles for keyboard nav ===== */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.8);
+  outline-offset: 2px;
+}
+
+/* ===== Mute button ===== */
+.mute-btn {
+  transition: all 0.2s ease;
+}
+.mute-btn:hover {
+  transform: scale(1.1);
+}

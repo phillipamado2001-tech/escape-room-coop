@@ -1,0 +1,6 @@
+node_modules
+.next
+generated-assets
+.env.local
+.git
+*.md
