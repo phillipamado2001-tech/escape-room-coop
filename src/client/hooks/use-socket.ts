@@ -7,7 +7,12 @@ import { audio } from "@client/lib/audio";
 
 type GameSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3001";
+// In production (Railway), Socket.io is on the same origin. In dev, separate port.
+const SOCKET_URL =
+  process.env.NEXT_PUBLIC_SOCKET_URL ||
+  (typeof window !== "undefined" && window.location.hostname !== "localhost"
+    ? window.location.origin
+    : "http://localhost:3001");
 
 export function useSocket() {
   const socketRef = useRef<GameSocket | null>(null);
